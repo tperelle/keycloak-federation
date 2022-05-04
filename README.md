@@ -6,13 +6,13 @@ The purpose of this project is to test Keycloak using federation with an externa
 
 ---
 
-## Lab
+## The lab
 
 <img src="docs/images/keycloak-federation.png" width="350px" />
 
 Install and configure the lab:
 - See [How to setup the kubernetes cluster](cluster/README.md)
-- See [How to setup  the lab](lab/README.md)
+- See [How to setup  the SSO solution](lab/README.md)
 
 
 
