@@ -162,7 +162,78 @@ Navigate to the DNS your configured in keycloak configuration, here is `https://
 
 If it doesn't work, check if the `keycloak` ingress has been processed in the logs of the nginx controller. It may be some [issues arround the IngressClass](https://kubernetes.github.io/ingress-nginx/).
 
+Note that the access for Keycloak management is separated from the access as a service user.
+
+You can logging in into the administration console using the account you configured in [keycloack/values-keycloak.yml](keycloack/values-keycloak.yml).
+
 > Additionnal Sources:
 > - [Keycloak helm chart configuration](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak)
 > - [NGINX ingress controller troubleshooting](https://kubernetes.github.io/ingress-nginx/troubleshooting/)
 
+## Linking Keycloak with OpenLDAP
+
+### Create a realm
+
+Connect as admin in the administration console and create a new realm call `Business`. It's always a good thing to seperate administration and business usages.
+
+### Configure federation
+
+Then go in `User federation`.
+
+Then setup the `ldap` federation according your OpenLDAP configuration.
+
+<img src="../docs/images/keycloak-federation-setup.png" width="400px" />
+
+Use `Test connection` and `Test authentication` buttons to check if the federation is working.
+
+Save federation settings and enter the `Mappers` tab of the `ldap` federation.
+
+Click the `Create` button to create the `group` mappers of type `group-ldap-mapper` as described bellow:
+
+<img src="../docs/images/keycloak-federation-mappers.png" width="400px" />
+
+### Test
+
+Create a new user in the `Business` realm.
+
+Use ldapsearch to check if this new user has been well created in the LDAP:
+
+```bash
+# Forward the OpenLDAP port locally
+kubectl port-forward --namespace identity \
+  $(kubectl get pods -n identity --selector='release=openldap' -o jsonpath='{.items[0].metadata.name}') \
+  3890:389
+
+# Query to check if the new user exists
+$ ldapsearch -x -H ldap://localhost:3890 -b dc=ssotest,dc=perelle,dc=com -D "cn=admin,dc=ssotest,dc=perelle,dc=com" -w password
+
+[...]
+# thomas, People, ssotest.perelle.com
+dn: uid=thomas,ou=People,dc=ssotest,dc=perelle,dc=com
+uid: thomas
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+mail: thomas@perelle.com
+sn: perelle
+cn: thomas
+[...]
+```
+
+Now create a new `team` group from the left menu, always in the `Business` realm.
+
+From the `Users` menu, select the new created user and add it in the `team` group.
+
+Re-run the ldapsearch command and see that the new group is also synchronized:
+
+```bash
+[...]
+# team, Group, ssotest.perelle.com
+dn: cn=team,ou=Group,dc=ssotest,dc=perelle,dc=com
+objectClass: groupOfUniqueNames
+uniqueMember: cn=empty-membership-placeholder
+uniqueMember: uid=thomas,ou=People,dc=ssotest,dc=perelle,dc=com
+cn: team
+[...]
+```
+
+The SSO solution is up and running. All that's left to do is to use it to secure some cluster's applications.
