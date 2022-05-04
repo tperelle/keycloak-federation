@@ -236,4 +236,40 @@ cn: team
 [...]
 ```
 
-The SSO solution is up and running. All that's left to do is to use it to secure some cluster's applications.
+## Connection
+
+The SSO solution is up and running. 
+- Keycloack welcome page: https://sso.ssotest.perelle.com/
+- Keycloack Administration console: https://sso.ssotest.perelle.com/auth/admin/master/console
+- User login page for each realm:
+  - `Master`: https://sso.ssotest.perelle.com/auth/realms/master/account
+  - `Business`: https://sso.ssotest.perelle.com/auth/realms/Business/account
+
+All this done, you can deploy secure applications.
+
+## OAuth2 Proxy
+
+Some products or applications integrate natively the capability to configure OAuth2 provider. For the others, we can use [OAuth2 Proxy](https://oauth2-proxy.github.io/oauth2-proxy/) to secure the application at the edge with ingress annotations.
+
+Create a new client application `oauth2-proxy` in Keycloak:
+
+<img src="../docs/images/keycloak-oauth2-setup.png" width="400px" />
+
+Save and go to the `Credentials` tab to note the associated secret.
+
+In the `Mappers` tab, create a new `Groups`:
+
+<img src="../docs/images/keycloak-oauth2-mappers.png" width="400px" />
+
+Now we can prepare the deployment of OAuth2 Proxy configuring the value file `values-oauth2-proxy.yml`, mainly `clientID`, `clientSecret`, `cookieSecret` and the DNS.
+
+Then deploy OAuth2 Proxy with the embedded chart:
+
+```bash 
+helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
+helm upgrade --install oauth2-proxy oauth2-proxy/oauth2-proxy --values oauth2-proxy/values-oauth2-proxy.yml
+```
+
+We get the `Sign in with Keycloak` option when we access to OAuth2 Proxy ingress domain:
+
+<img src="../docs/images/keycloak-oauth2-login.png" width="400px" />
