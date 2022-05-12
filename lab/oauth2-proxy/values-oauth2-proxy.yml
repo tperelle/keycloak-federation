@@ -1,14 +1,14 @@
 # Oauth client configuration specifics
 config:
   clientID: "oauth2-proxy"
-  clientSecret: "moN1Bwpu3qINSkZt2bRp0FJ3MM3BxuZW"
+  clientSecret: "GKOHsFuKHr5xzg3gE6rz2UgCY2TWprTu"
   # Create a new secret with the following command
   # openssl rand -base64 32 | head -c 32 | base64
   cookieSecret: "NXA4K2lMUGsrSnFLYnprWnZESE5GUDNINzIrc2NHUnQ="
   configFile: |-
     provider = "oidc"
     provider_display_name = "Keycloak"
-    oidc_issuer_url = "https://sso.ssotest.perelle.com/auth/realms/master"
+    oidc_issuer_url = "https://sso.ssotest.perelle.com/auth/realms/Business"
     email_domains = [ "*" ]
     scope = "openid profile email"
     cookie_domains = ".ssotest.perelle.com"
