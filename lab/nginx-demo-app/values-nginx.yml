@@ -27,7 +27,7 @@ ingress:
   hostname: nginx-demo-app.ssotest.perelle.com
   tls: true
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/auth-url: "https://oauth.ssotest.perelle.com/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://oauth.ssotest.perelle.com/oauth2/start?rd=$scheme://$best_http_host$request_uri"
     nginx.ingress.kubernetes.io/auth-response-headers: "x-auth-request-user, x-auth-request-email, x-auth-request-access-token"
