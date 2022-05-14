@@ -2,8 +2,7 @@
 
 The purpose of this project is to test Keycloak using federation with an external LDAP.
 
-<img src="docs/images/keycloak-logo.png" width="250px" />
-<img src="docs/images/openldap-logo.png" width="200px" />
+<img src="docs/images/keycloak-logo.png" width="250px" /> <img src="docs/images/openldap-logo.png" width="200px" />
 
 ---
 
