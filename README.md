@@ -14,25 +14,30 @@ Install and configure the lab:
 
 ## Deploy a secured application
 
+Now we have a SSO solution ready to use, we are going to deploy a first secured application.
+
 We use [NGINX](https://nginx.org/en/) as demo application to check if the SSO solution, including OAuth2 Proxy, is working well. In this example we want that users login with Keycloak before they can access the welcome page of NGINX.
 
 Adapt the configuration in `nginx-demo-app/values-nginx.yml`.
 
-Then deploy the demo application:
+Dploy the demo application:
 
 ```bash 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm upgrade --install nginx-demo-app bitnami/nginx --values nginx-demo-app/values-nginx.yml
 ```
 
-Then use your favorite browser with private windows to try accessing the demo app `https://nginx-demo-app.ssotest.perelle.com` with or without being logged in before.
+Then use your favorite browser with private windows to try accessing the demo app https://nginx-demo-app.ssotest.perelle.com with or without being logged in before.
 
+> Note: Log in with the user account you have created in the `Business` realm. It's in this one that we have created the `oauth2-proxy` client application. The `admin` account is in the `master` realm and cannot access it.
+
+Result:
 - You get the Keycloak login page if your are not already identified
 - You can directly access the demo app if you are already identified 
 
 ## Identification process
 
-Let's have a look at the detailled process:
+Let's have a look at the detailled process when we access a secured application:
 
 <img src="docs/images/sso-process-overview.png" width="500px" />
 
@@ -47,7 +52,22 @@ Let's have a look at the detailled process:
 
 ## Few tests
 
-### LDAP deconnexion
+Now that we have a working platform, it's time to do some tests to understand how it works.
+
+### Deploy an unsecured app
+
+I just want to demonstrate that the security with OAuth2 Proxy is setup in the ingress and that we can continue to deploy unsecured applications.
+
+Adapt the configuration in `nginx-unsecured/values-nginx.yml` that don't contains annotation for OAuth2 Proxy and deploy it:
+
+```bash 
+helm upgrade --install nginx-unsecured bitnami/nginx --values nginx-unsecured/values-nginx.yml
+```
+
+Check with a new private window that you can access the application https://nginx-unsecured.ssotest.perelle.com without being identified.
+
+
+### Federation failure
 
 What happens if OpenLDAP goes down and the federation doesn't work anymore ?\
 Let's see if I can continue authenticating to Keycloak and accessing the secured application.
@@ -70,4 +90,7 @@ Get back to 1 replica for OpenLDAP:
 kubectl scale --replicas=1 deployment.apps/openldap -n identity
 ```
 
-It works again.
+It works again. So we can conclude that, in this configuration, Keycloak cannot work in an autonomous way if the federation goes down.
+
+> Additional sources:
+> - https://www.keycloak.org/docs/latest/server_admin/
