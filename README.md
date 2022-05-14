@@ -1,4 +1,4 @@
-# keyclock-federation
+# keycloak-federation
 
 The purpose of this project is to test Keycloak using federation with an external LDAP.
 
