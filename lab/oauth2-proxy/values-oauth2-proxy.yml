@@ -1,7 +1,7 @@
 # Oauth client configuration specifics
 config:
   clientID: "oauth2-proxy"
-  clientSecret: "GKOHsFuKHr5xzg3gE6rz2UgCY2TWprTu"
+  clientSecret: "jlfa14HlYOmqeAdXZyfMSWl50Fd96pkf"
   # Create a new secret with the following command
   # openssl rand -base64 32 | head -c 32 | base64
   cookieSecret: "NXA4K2lMUGsrSnFLYnprWnZESE5GUDNINzIrc2NHUnQ="
