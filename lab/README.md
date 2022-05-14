@@ -263,7 +263,7 @@ Then deploy OAuth2 Proxy with the embedded chart:
 
 ```bash 
 helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
-helm upgrade --install oauth2-proxy oauth2-proxy/oauth2-proxy --values oauth2-proxy/values-oauth2-proxy.yml
+helm upgrade --install oauth2-proxy oauth2-proxy/oauth2-proxy --values oauth2-proxy/values-oauth2-proxy.yml --namespace identity --create-namespace
 ```
 
 We get the `Sign in with Keycloak` option when we access to OAuth2 Proxy ingress domain at https://oauth.ssotest.perelle.com
