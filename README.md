@@ -96,3 +96,4 @@ It works again. So we can conclude that, in this configuration, Keycloak cannot 
 
 > Additional sources:
 > - https://www.keycloak.org/docs/latest/server_admin/
+> - https://keycloak.discourse.group/t/cache-settings-for-ldap-user-storage-provider/2554/3
