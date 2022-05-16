@@ -12,6 +12,8 @@ Install and configure the lab:
 - See [Setup the kubernetes cluster](cluster/README.md)
 - See [Setup the SSO solution](lab/README.md)
 
+<img src="docs/images/lab.png" width="500px" />
+
 ## Deploy a secured application
 
 Now we have a SSO solution ready to use, we are going to deploy a first secured application.

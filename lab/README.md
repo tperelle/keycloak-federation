@@ -1,10 +1,10 @@
 # Deploy the lab
 
-The SSO solution is composed of [Keycloak](https://www.keycloak.org) and [OpenLDAP](https://www.openldap.org). 
+The SSO solution is composed of [Keycloak](https://www.keycloak.org), [OpenLDAP](https://www.openldap.org) and [OAuth2 Proxy](https://oauth2-proxy.github.io/oauth2-proxy/). 
 
-<img src="../docs/images/keycloak-federation.png" width="350px" />
+<img src="../docs/images/lab.png" width="500px" />
 
-I rely on the [talkingquickly](https://www.talkingquickly.co.uk/kubernetes-sso-a-detailed-guide) articles for the installation.
+I rely on the [talkingquickly](https://www.talkingquickly.co.uk/kubernetes-sso-a-detailed-guide) articles for this installation.
 
 ## OpenLDAP
 

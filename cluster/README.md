@@ -1,5 +1,7 @@
 # Setup the Kubernetes cluster
 
+<img src="../docs/images/cluster.png" width="300px" />
+
 ## Kubernetes cluster
 
 Before anything else, we need a kubernetes cluster. I use Azure AKS but you can use any other kubernetes cluster.
