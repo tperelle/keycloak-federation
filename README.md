@@ -44,13 +44,13 @@ Let's have a look at the detailled process when we access a secured application:
 <img src="docs/images/sso-process-overview.png" width="500px" />
 
 1. Customer requests the demo app
-2. Ingress controler redirect to OAuth2 Proxy according annotations in the demo app ingress
+2. Ingress controller redirect to OAuth2 Proxy according annotations in the demo app ingress
 3. OAuth2 Proxy checks with Keycloak if the user is authenticated
 4. The user is not identified, Keycloak presents the login page
 5. The user fills in his credentials for authentcation
 6. Keycloak passes identification datas to OAuth2 Proxy
-7. OAuth2 Proxy informs Ingress Controler that the user is identified and is authorized to access the application
-8. Ingress controler routes the request to the demo app
+7. OAuth2 Proxy informs Ingress Controller that the user is identified and is authorized to access the application
+8. Ingress controller routes the request to the demo app
 
 ## Few tests
 
