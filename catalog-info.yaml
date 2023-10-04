@@ -5,7 +5,7 @@ metadata:
   description: The purpose of this project is to test Keycloak using federation with an external LDAP.
   links:
     - url: https://medium.com/linkbynet/kubernetes-sso-using-keycloak-aafdb730d192
-      title: Deploy enterprise grade AKS environments
+      title: Kubernetes SSO using Keycloak
       icon: techdocs
 spec:
   type: article
