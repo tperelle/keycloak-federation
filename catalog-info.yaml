@@ -7,6 +7,9 @@ metadata:
     - url: https://medium.com/linkbynet/kubernetes-sso-using-keycloak-aafdb730d192
       title: Kubernetes SSO using Keycloak
       icon: techdocs
+  tags:
+    - kubernetes
+    - iam
 spec:
   type: article
   system: github
