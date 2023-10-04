@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: keycloak-federation
+  description: The purpose of this project is to test Keycloak using federation with an external LDAP.
+  links:
+    - url: https://medium.com/linkbynet/kubernetes-sso-using-keycloak-aafdb730d192
+spec:
+  type: article
+  lifecycle: production
+  owner: thomas
