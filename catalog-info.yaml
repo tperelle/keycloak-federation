@@ -14,4 +14,4 @@ spec:
   type: article
   system: github
   lifecycle: production
-  owner: thomas
+  owner: user:tperelle
